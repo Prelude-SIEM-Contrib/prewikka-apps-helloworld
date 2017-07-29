@@ -1,17 +1,17 @@
-"""A HelloWorld plugin"""
-from prewikka import view
+from __future__ import absolute_import, division, print_function, unicode_literals
 
+from prewikka import version, view, template
+
+"""A HelloWorld plugin"""
 
 class HelloWorld(view.View):
-    """The view that displays Hello World"""
     plugin_name = "Hello World"
     plugin_author = "Antoine Luong"
-    plugin_license = "GPL"
-    plugin_version = "1.0.0"
-    plugin_copyright = "CSSI"
-    plugin_description = "A plugin that says hello world!"
-    view_name = "Hello"
-    view_section = "Hello"
+    plugin_license = version.__license__
+    plugin_version = version.__version__
+    plugin_copyright = version.__copyright__
+    plugin_description = N_("A plugin that says hello world!")
 
+    @view.route("/helloworld", menu=(N_('HelloWorld'), N_('HelloWorld')))
     def render(self):
-        return "<div>Hello World!</div>"
+        return template.PrewikkaTemplate(__name__, "templates/helloworld.mak").render()
